@@ -15,39 +15,49 @@ export class Login extends React.Component {
     return (
       <React.Fragment>
         <CssBaseline />
-        <main className="layout">
-          <Paper className="paper">
-            <Avatar className="avatar">
-              <LockIcon />
-            </Avatar>
-            <Typography variant="headline">Sign in</Typography>
-            <form className="form">
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="email">Email Address</InputLabel>
-                <Input id="email" name="email" autoComplete="email" autoFocus />
-              </FormControl>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input
-                  name="password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-              </FormControl>
-              <Button
-                type="submit"
-                fullWidth
-                variant="raised"
-                color="primary"
-                className="submit"
-                href="/app"
-              >
-                Sign in
-              </Button>
-            </form>
-          </Paper>
-        </main>
+        <div className="App-body">
+          <main className="layout">
+            <Paper className="paper">
+              <Avatar className="avatar">
+                <LockIcon />
+              </Avatar>
+              <Typography variant="headline">Sign in</Typography>
+              <form className="form">
+                <FormControl margin="normal" required fullWidth>
+                  <InputLabel htmlFor="email">Email Address</InputLabel>
+                  <Input
+                    id="email"
+                    name="email"
+                    autoComplete="email"
+                    onChange={this.props.handleEmailChange}
+                    autoFocus
+                  />
+                </FormControl>
+                <FormControl margin="normal" required fullWidth>
+                  <InputLabel htmlFor="password">Password</InputLabel>
+                  <Input
+                    name="password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    value={this.props.password}
+                    onChange={this.props.handlePasswordChange}
+                  />
+                </FormControl>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="raised"
+                  color="primary"
+                  className="submit"
+                  onClick={this.props.handleLogin}
+                >
+                  Sign in
+                </Button>
+              </form>
+            </Paper>
+          </main>
+        </div>
       </React.Fragment>
     );
   }

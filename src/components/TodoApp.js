@@ -6,15 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import TodoInput from "./TodoInput";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { items: [], text: "", priority: 0, dueDate: moment() };
-    this.handleTextChange = this.handleTextChange.bind(this);
-    this.handlePriorityChange = this.handlePriorityChange.bind(this);
-    this.handleDateChange = this.handleDateChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+class TodoApp extends Component {
+  state = { items: [], text: "", priority: 0, dueDate: moment() };
 
   render() {
     return (
@@ -26,41 +19,48 @@ class App extends Component {
 
         <div className="App-body">
           <br />
-          <TodoInput
-            handleTextChange={this.handleTextChange}
-            handlePriorityChange={this.handlePriorityChange}
-            handleDateChange={this.handleDateChange}
-            handleSubmit={this.handleSubmit}
-            state={this.state}
-          />
+          <div className="search">
+            <div>
+              <TodoInput
+                handleTextChange={this.handleTextChange}
+                handlePriorityChange={this.handlePriorityChange}
+                handleDateChange={this.handleDateChange}
+                handleSubmit={this.handleSubmit}
+                state={this.state}
+              />
+            </div>
+            <br />
+            <br />
+            <div>
+              <TodoList todoList={this.state.items} />
+            </div>
+          </div>
           <br />
           <br />
-          <TodoList todoList={this.state.items} />
         </div>
       </div>
     );
   }
 
-  handleTextChange(e) {
+  handleTextChange = e => {
     this.setState({
       text: e.target.value
     });
-  }
+  };
 
-  handlePriorityChange(e) {
+  handlePriorityChange = e => {
     this.setState({
       priority: e.target.value
     });
-  }
+  };
 
-  handleDateChange(event) {
-    console.log(event.target.value);
+  handleDateChange = event => {
     this.setState({
       dueDate: event.target.value
     });
-  }
+  };
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
 
     if (
@@ -69,7 +69,6 @@ class App extends Component {
       !this.state.dueDate
     )
       return;
-
     const newItem = {
       text: this.state.text,
       priority: this.state.priority,
@@ -81,7 +80,7 @@ class App extends Component {
       priority: "",
       dueDate: ""
     }));
-  }
+  };
 }
 
-export default App;
+export default TodoApp;

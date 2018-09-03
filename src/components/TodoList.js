@@ -20,7 +20,7 @@ export class TodoList extends React.Component {
     });
 
     return (
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>Task</th>

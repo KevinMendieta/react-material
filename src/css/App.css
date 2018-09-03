@@ -8,13 +8,13 @@
 }
 
 .App-header {
-  background-color: #222;
+  background-color: #333;
   height: 150px;
   padding: 20px;
   color: white;
 }
 
-/*.App-body {
+.App-body {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -26,7 +26,7 @@
   justify-content: center;
   text-align: center;
   color: #333;
-}*/
+}
 
 .App-title {
   font-size: 1.5em;
@@ -36,12 +36,41 @@
   font-size: large;
 }
 
-.todo-form {
-  border: 1px solid lightsteelblue;
+.table {
+  font-family: arial, sans-serif;
   margin: auto;
-  width: 60%;
+  width: 50% !important;
+  background-color: #333;
+  color: white;
+  border-collapse: collapse;
+}
+
+.search {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  overflow-y: scroll;
+  padding: 15px 30px;
+  border-radius: 5px;
+}
+
+.search > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.todo-form {
+  margin: auto;
+  width: 30%;
   padding: 20px;
   text-align: center;
+  background-color: #333;
+  color: white;
+  border: white;
 }
 
 .left {
@@ -61,12 +90,12 @@
   }
 }
 
-table {
+/*table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 70%;
   margin: auto;
-}
+}*/
 
 td,
 th {
@@ -75,6 +104,6 @@ th {
   padding: 8px;
 }
 
-tr:nth-child(even) {
+/*tr:nth-child(even) {
   background-color: #dddddd;
-}
+}*/
