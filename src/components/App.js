@@ -9,7 +9,6 @@ localStorage.setItem("isLoggedIn", false);
 
 class App extends Component {
   state = {
-    isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")),
     email: "",
     password: ""
   };
