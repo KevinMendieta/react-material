@@ -1,11 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Login } from "./Login";
 import TodoApp from "./TodoApp";
-
-localStorage.setItem("email", "test@mail.com");
-localStorage.setItem("password", "123");
-localStorage.setItem("isLoggedIn", false);
 
 class App extends Component {
   state = {
@@ -20,7 +15,6 @@ class App extends Component {
       logEmail === localStorage.getItem("email") &&
       logPassword === localStorage.getItem("password")
     ) {
-      console.log("loged");
       this.setState({ isLoggedIn: true });
       localStorage.setItem("isLoggedIn", true);
     }
@@ -45,26 +39,10 @@ class App extends Component {
   app = () => <TodoApp />;
 
   render() {
-    if (!this.state.isLoggedIn) {
-      return (
-        <Router>
-          <div>
-            <div>
-              <Route exact path="/" component={this.login} />
-            </div>
-          </div>
-        </Router>
-      );
+    if (!JSON.parse(localStorage.getItem("isLoggedIn"))) {
+      return this.login();
     } else {
-      return (
-        <Router>
-          <div>
-            <div>
-              <Route exact path="/" component={this.app} />
-            </div>
-          </div>
-        </Router>
-      );
+      return this.app();
     }
   }
 }
