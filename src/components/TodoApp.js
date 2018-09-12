@@ -5,11 +5,32 @@ import { TodoList } from "./TodoList";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import TodoInput from "./TodoInput";
-
+import Api from "../api";
 class TodoApp extends Component {
-  state = { items: [], text: "", priority: 0, dueDate: moment() };
+  state = {
+    items: [],
+    text: "",
+    priority: 0,
+    dueDate: moment()
+  };
+
+  getTodos = () => {
+    return Api.getByAuthor(this.filterTodos);
+  };
+
+  filterTodos = response => {
+    const newList = response.data.map(todo => {
+      return {
+        text: todo.name,
+        priority: todo.priority,
+        dueDate: todo.dueDate
+      };
+    });
+    this.setState({ items: newList });
+  };
 
   render() {
+    this.getTodos();
     return (
       <div className="App">
         <header className="App-header">
@@ -70,16 +91,17 @@ class TodoApp extends Component {
     )
       return;
     const newItem = {
-      text: this.state.text,
+      name: this.state.text,
       priority: this.state.priority,
       dueDate: this.state.dueDate
     };
-    this.setState(prevState => ({
-      items: prevState.items.concat(newItem),
-      text: "",
-      priority: "",
-      dueDate: ""
-    }));
+    Api.putNewTodo(newItem, () => {
+      this.setState({
+        text: "",
+        priority: "",
+        dueDate: ""
+      });
+    });
   };
 }
 

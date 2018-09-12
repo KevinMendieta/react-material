@@ -9,8 +9,35 @@ import LockIcon from "@material-ui/icons/LockOutlined";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import "../css/Login.css";
+import Api from "../api";
 
 export class Login extends React.Component {
+  state = {
+    email: "",
+    password: ""
+  };
+
+  handleLogin = event => {
+    const logEmail = this.state.email;
+    const logPassword = this.state.password;
+    Api.login(logEmail, logPassword)
+      .then(response => {
+        alert(response.data);
+        localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("token", response.data.accessToken);
+      })
+      .catch(error => {
+        alert("error", error.data);
+      });
+  };
+
+  handlePasswordChange = event => {
+    this.setState({ password: event.target.value });
+  };
+  handleEmailChange = event => {
+    this.setState({ email: event.target.value });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -29,7 +56,8 @@ export class Login extends React.Component {
                     id="email"
                     name="email"
                     autoComplete="email"
-                    onChange={this.props.handleEmailChange}
+                    value={this.state.email}
+                    onChange={this.handleEmailChange}
                     autoFocus
                   />
                 </FormControl>
@@ -40,8 +68,8 @@ export class Login extends React.Component {
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    value={this.props.password}
-                    onChange={this.props.handlePasswordChange}
+                    value={this.state.password}
+                    onChange={this.handlePasswordChange}
                   />
                 </FormControl>
                 <Button
@@ -50,7 +78,7 @@ export class Login extends React.Component {
                   variant="raised"
                   color="primary"
                   className="submit"
-                  onClick={this.props.handleLogin}
+                  onClick={this.handleLogin}
                 >
                   Sign in
                 </Button>
